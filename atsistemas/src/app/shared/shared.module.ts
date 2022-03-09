@@ -4,21 +4,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MenuComponent } from './components/menu/menu.component';
 import { HeadComponent } from './components/head/head.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MoviesService } from '../features/movies/services/movies.service';
 import { MoviesBackendService } from '../features/movies/services/movies-backend.service';
 import { MoviesEndpointService } from '../features/movies/services/movies-endpoint.service';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 @NgModule({
   declarations: [
-    MenuComponent,
     HeadComponent,
     FooterComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -26,15 +27,16 @@ import { MoviesEndpointService } from '../features/movies/services/movies-endpoi
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    TranslateModule
+    TranslateModule,
+    AppRoutingModule
   ],
   exports: [
     NgbModule,
     FontAwesomeModule,
-    MenuComponent,
     HeadComponent,
     FooterComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    PageNotFoundComponent
   ],
   providers: [
     MoviesService,

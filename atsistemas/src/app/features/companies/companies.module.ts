@@ -5,22 +5,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ListMoviesComponent } from './components/list-movies/list-movies.component';
-import { FilterMoviesComponent } from './components/filter-movies/filter-movies.component';
-import { DetailMoviesComponent } from './components/detail-movies/detail-movies.component';
+import { ListCompaniesComponent } from './components/list-companies/list-companies.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { MoviesService } from './services/movies.service';
-import { MoviesBackendService } from './services/movies-backend.service';
-import { MoviesEndpointService } from './services/movies-endpoint.service';
+
 
 
 @NgModule({
   declarations: [
-    ListMoviesComponent,
-    FilterMoviesComponent,
-    DetailMoviesComponent
+    ListCompaniesComponent
   ],
   imports: [
     CommonModule,
@@ -42,17 +36,11 @@ import { MoviesEndpointService } from './services/movies-endpoint.service';
   exports: [
     NgbModule,
     FontAwesomeModule,
-    ListMoviesComponent,
-    FilterMoviesComponent,
-    DetailMoviesComponent
+    ListCompaniesComponent
   ],
-  providers: [
-    MoviesService,
-    MoviesBackendService,
-    { provide: MoviesEndpointService, useExisting: MoviesBackendService },
-  ]
+  providers: []
 })
-export class MoviesModule { }
+export class CompaniesModule { }
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     const pathroot = environment.production ? './assets/i18n/prod' : './assets/i18n/convocatoriaAbierta/documentos/dev';
     return new TranslateHttpLoader(http, pathroot, '.json');

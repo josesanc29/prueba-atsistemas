@@ -1,4 +1,4 @@
-<div class="row card-group" *ngIf="peliculas?.length>0; else nodata">
+<div class="row card-group" *ngIf="peliculas?.length>0">
     <div class="col-4" *ngFor="let pelicula of peliculas; let i = index">
         <div class="card">
             <img [src]="pelicula.poster" class="card-img-top" alt="Poster de la pelicula">
@@ -22,11 +22,9 @@
         </div>
     </div>
 </div>
-<ng-template #nodata>
-    <h3>No se han encontrado peliculas</h3>
-</ng-template>
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <button class="btn btn-dark" type="button" (click)="addMovie()"></button>
     </div>
 </div>
+<ngx-spinner size="medium" [type]="typeSelected"></ngx-spinner>

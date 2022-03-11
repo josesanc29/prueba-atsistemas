@@ -1,4 +1,7 @@
-<div class="row card-group" *ngIf="companies?.length>0; else nodata">
+<ngx-spinner size="medium"></ngx-spinner>
+<!-- <div class="row card-group" *ngIf="companies?.length>0; else nodata"> -->
+<div class="row card-group" *ngIf="companies?.length>0">
+
     <div class="col-4" *ngFor="let companie of companies; let i = index">
         <div class="card">
             <div class="card-body">
@@ -17,6 +20,4 @@
         </div>
     </div>
 </div>
-<ng-template #nodata>
-    <h3>No se han encontrado companies</h3>
-</ng-template>
+<ngx-spinner size="medium" [type]="typeSelected"></ngx-spinner>

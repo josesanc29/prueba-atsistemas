@@ -3,6 +3,7 @@ import { MoviesService } from './../../services/movies.service';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/shared/services/language.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-list-movies',
@@ -14,12 +15,16 @@ export class ListMoviesComponent implements OnInit {
   actors: any[] = [];
   companies: any[] = [];
   loading = false;
+  typeSelected: string;
 
 
   constructor(private language: LanguageService,
               private movieService: MoviesService,
               public translate: TranslateService,
-              ) { }
+              private spinner: NgxSpinnerService
+              ) {
+                this.typeSelected = 'ball-fussion';
+              }
 
   ngOnInit(): void {
     this.getPeliculas();
@@ -29,8 +34,9 @@ export class ListMoviesComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getPeliculas(){
+    this.spinner.show();
     this.movieService.getListMovies().subscribe((listMovies) => {
-      console.log('listado de peliculas ', listMovies);
+      this.spinner.hide();
       this.peliculas = listMovies;
     });
   }
@@ -38,7 +44,6 @@ export class ListMoviesComponent implements OnInit {
   // tslint:disable-next-line:typedef
   getActors(){
     this.movieService.getListActors().subscribe((listActors) => {
-      console.log('listado de actores ', listActors);
       this.actors = listActors;
     });
   }
@@ -46,7 +51,6 @@ export class ListMoviesComponent implements OnInit {
   // tslint:disable-next-line:typedef
   getCompanies(){
     this.movieService.getListCompanies().subscribe((listCompanies) => {
-      console.log('listado de compañias ', listCompanies);
       this.actors = listCompanies;
     });
   }

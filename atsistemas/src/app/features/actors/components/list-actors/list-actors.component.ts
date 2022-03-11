@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Actors } from './../../../movies/models/actores.interface';
 import { Peliculas } from './../../../movies/models/peliculas.interface';
 import { Component, OnInit } from '@angular/core';
@@ -13,10 +14,14 @@ import { LanguageService } from 'src/app/shared/services/language.service';
 export class ListActorsComponent implements OnInit {
   peliculas: Peliculas[] = [];
   actors: Actors[] = [];
+  typeSelected: string;
 
   constructor(private language: LanguageService,
               private movieService: MoviesService,
-              public translate: TranslateService){ }
+              private spinner: NgxSpinnerService,
+              public translate: TranslateService){
+                this.typeSelected = 'ball-fussion';
+              }
 
   ngOnInit(): void {
     this.getActors();
@@ -25,8 +30,9 @@ export class ListActorsComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getActors(){
+    this.spinner.show();
     this.movieService.getListActors().subscribe((listActors) => {
-      console.log('listado de actores ', listActors);
+      this.spinner.hide();
       this.actors = listActors;
     });
   }

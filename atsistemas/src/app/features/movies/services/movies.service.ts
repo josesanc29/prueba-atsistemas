@@ -3,8 +3,6 @@ import { Observable } from 'rxjs';
 import { MoviesBackendService } from './movies-backend.service';
 
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +13,16 @@ export class MoviesService {
   // tslint:disable-next-line:typedef
   getListMovies(){
     return this.backend.getListMoviesData();
+  }
+
+  // tslint:disable-next-line:typedef
+  getListActors(){
+    return this.backend.getListActorsData();
+  }
+
+  // tslint:disable-next-line:typedef
+  getListCompanies(){
+    return this.backend.getListCompaniesData();
   }
 
   public get(id: number): Observable<any> {

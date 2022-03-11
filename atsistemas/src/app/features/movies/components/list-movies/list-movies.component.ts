@@ -1,7 +1,7 @@
+import { Peliculas } from './../../models/peliculas.interface';
 import { MoviesService } from './../../services/movies.service';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { FormBuilder } from '@angular/forms';
 import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
@@ -11,6 +11,8 @@ import { LanguageService } from 'src/app/shared/services/language.service';
 })
 export class ListMoviesComponent implements OnInit {
   peliculas: any[] = [];
+  actors: any[] = [];
+  companies: any[] = [];
   loading = false;
 
 
@@ -21,6 +23,8 @@ export class ListMoviesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPeliculas();
+    this.getActors();
+    this.getCompanies();
   }
 
   // tslint:disable-next-line:typedef
@@ -29,6 +33,32 @@ export class ListMoviesComponent implements OnInit {
       console.log('listado de peliculas ', listMovies);
       this.peliculas = listMovies;
     });
+  }
+
+  // tslint:disable-next-line:typedef
+  getActors(){
+    this.movieService.getListActors().subscribe((listActors) => {
+      console.log('listado de actores ', listActors);
+      this.actors = listActors;
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getCompanies(){
+    this.movieService.getListCompanies().subscribe((listCompanies) => {
+      console.log('listado de compañias ', listCompanies);
+      this.actors = listCompanies;
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  selectMovie(pelicula: Peliculas){
+    console.log('pelicula selected ', pelicula);
+  }
+
+  // tslint:disable-next-line:typedef
+  addMovie(){
+    console.log('me has pulsado para añadir una nueva pelicula');
   }
 
 }

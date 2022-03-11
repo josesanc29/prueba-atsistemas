@@ -20,7 +20,28 @@ export class MoviesBackendService {
   getListMoviesData(): Observable<any> {
     const url = `${this.apiBase}/movies`;
     return this.http.get(url).pipe(map((response) => {
-      console.log('response service ', response);
+      return response;
+    }),
+    catchError((error: HttpErrorResponse) => {
+      return of(error);
+    })
+    );
+  }
+
+  getListActorsData(): Observable<any> {
+    const url = `${this.apiBase}/actors`;
+    return this.http.get(url).pipe(map((response) => {
+      return response;
+    }),
+    catchError((error: HttpErrorResponse) => {
+      return of(error);
+    })
+    );
+  }
+
+  getListCompaniesData(): Observable<any> {
+    const url = `${this.apiBase}/companies`;
+    return this.http.get(url).pipe(map((response) => {
       return response;
     }),
     catchError((error: HttpErrorResponse) => {

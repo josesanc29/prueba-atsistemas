@@ -1,1 +1,24 @@
-<p>list-actors works!</p>
+<div class="row card-group" *ngIf="actors?.length>0; else nodata">
+    <div class="col-4" *ngFor="let actor of actors; let i = index">
+        <div class="card">
+            <img [src]="actor.img" class="card-img-top" alt="Foto del actor">
+            <div class="card-body">
+                <h5 class="card-title">Nombre: {{actor.first_name}}</h5>
+                <h5 class="card-title">Apellido: {{actor.last_name}}</h5>
+                <p class="card-text">Genero: {{actor.gender}}</p>
+                <p class="card-text">Fecha nacimiento: {{actor.birthdate}}</p>
+                <p class="card-text">Ciudad de nacimiento: {{actor.bornCity}}</p>
+                <p class="card-text">Puntuacion de la critica: {{actor.rating}} sobre 5</p>
+                <ol>
+                    <li>
+                        Peliculas del actor : {{actor.movies}}
+                    </li>
+                </ol>
+                <a (click)="selectMovie(actor)" class="btn btn-primary">Ver detalle</a>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #nodata>
+    <h3>No se han encontrado actores</h3>
+</ng-template>

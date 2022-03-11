@@ -1,32 +1,54 @@
-import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { MoviesEndpointService } from './movies-endpoint.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
-import { ConfigurationService } from 'src/app/shared/services/configuration.service';
-import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MoviesBackendService extends ApiService implements MoviesEndpointService {
-
+export class MoviesBackendService {
+  apiBase = environment.apiUrl;
   constructor(
-    http: HttpClient,
-    loadingService: LoadingService,
-    private config: ConfigurationService,
+    public loadingService: LoadingService,
     public translate: TranslateService,
-  ) {
-    super(http, loadingService, config.data.apisBaseUrl);
+    public http: HttpClient,
+  ) {}
+
+  getListMoviesData(): Observable<any> {
+    const url = `${this.apiBase}/movies`;
+    return this.http.get(url).pipe(map((response) => {
+      return response;
+    }),
+    catchError((error: HttpErrorResponse) => {
+      return of(error);
+    })
+    );
   }
 
-  getListMovies(): Observable<any[]> {
-    return;
+  getListActorsData(): Observable<any> {
+    const url = `${this.apiBase}/actors`;
+    return this.http.get(url).pipe(map((response) => {
+      return response;
+    }),
+    catchError((error: HttpErrorResponse) => {
+      return of(error);
+    })
+    );
   }
 
-  search(filtro: any): Observable<any> {
-    return;
+  getListCompaniesData(): Observable<any> {
+    const url = `${this.apiBase}/companies`;
+    return this.http.get(url).pipe(map((response) => {
+      return response;
+    }),
+    catchError((error: HttpErrorResponse) => {
+      console.log('catchError ', error);
+      return of(error);
+    })
+    );
   }
 
   get(id: number): Observable<any> {

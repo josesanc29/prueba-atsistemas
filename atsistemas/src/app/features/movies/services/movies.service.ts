@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MoviesEndpointService } from './movies-endpoint.service';
-
+import { MoviesBackendService } from './movies-backend.service';
 
 
 @Injectable({
@@ -9,18 +8,25 @@ import { MoviesEndpointService } from './movies-endpoint.service';
 })
 export class MoviesService {
 
-  constructor(private endpoint: MoviesEndpointService) { }
+  constructor(private backend: MoviesBackendService) { }
 
   // tslint:disable-next-line:typedef
   getListMovies(){
-    return this.endpoint.getListMovies();
+    return this.backend.getListMoviesData();
   }
-  search(filtro: any = null): Observable<any> {
-    return this.endpoint.search(filtro);
+
+  // tslint:disable-next-line:typedef
+  getListActors(){
+    return this.backend.getListActorsData();
+  }
+
+  // tslint:disable-next-line:typedef
+  getListCompanies(){
+    return this.backend.getListCompaniesData();
   }
 
   public get(id: number): Observable<any> {
-    return this.endpoint.get(id);
+    return this.backend.get(id);
   }
 
 }

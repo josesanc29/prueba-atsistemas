@@ -11,7 +11,7 @@ export class ApiService {
 
   private apiUrl: string = null; // Config.apiUrl;
 
-  constructor(private http: HttpClient, public loadingService: LoadingService, private apiBaseUrl: string = null) {
+  constructor(public http: HttpClient, public loadingService: LoadingService, private apiBaseUrl: string = null) {
     if (this.apiBaseUrl) { this.apiUrl = apiBaseUrl; }
   }
 

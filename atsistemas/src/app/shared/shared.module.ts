@@ -6,20 +6,16 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeadComponent } from './components/head/head.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { MoviesService } from '../features/movies/services/movies.service';
-import { MoviesBackendService } from '../features/movies/services/movies-backend.service';
-import { MoviesEndpointService } from '../features/movies/services/movies-endpoint.service';
+// import { APP_ROUTES } from '../app-routing.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { FeaturesRoutingModule } from '../features/features-routing.module';
 
 
 @NgModule({
   declarations: [
     HeadComponent,
     FooterComponent,
-    BreadcrumbComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -28,20 +24,15 @@ import { AppRoutingModule } from '../app-routing.module';
     ReactiveFormsModule,
     FontAwesomeModule,
     TranslateModule,
-    AppRoutingModule
+    // APP_ROUTES,
+    FeaturesRoutingModule
   ],
   exports: [
     NgbModule,
     FontAwesomeModule,
     HeadComponent,
     FooterComponent,
-    BreadcrumbComponent,
-    PageNotFoundComponent
   ],
-  providers: [
-    MoviesService,
-    MoviesBackendService,
-    { provide: MoviesEndpointService, useExisting: MoviesBackendService },
-  ]
+  providers: []
 })
 export class SharedModule { }

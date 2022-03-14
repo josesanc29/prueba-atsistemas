@@ -25,7 +25,7 @@ export class MoviesService {
     return this.backend.getListCompaniesData();
   }
 
-  public get(id: number): Observable<any> {
+  public getMovie(id: number): Observable<any> {
     return this.backend.get(id);
   }
 

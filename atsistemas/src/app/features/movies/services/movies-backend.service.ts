@@ -5,6 +5,7 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { Peliculas } from '../models/peliculas.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,9 @@ export class MoviesBackendService {
     public http: HttpClient,
   ) {}
 
-  getListMoviesData(): Observable<any> {
+  getListMoviesData(): Observable<Peliculas | any> {
     const url = `${this.apiBase}/movies`;
-    return this.http.get(url).pipe(map((response) => {
+    return this.http.get(url).pipe(map((response: Peliculas) => {
       return response;
     }),
     catchError((error: HttpErrorResponse) => {
@@ -45,7 +46,6 @@ export class MoviesBackendService {
       return response;
     }),
     catchError((error: HttpErrorResponse) => {
-      console.log('catchError ', error);
       return of(error);
     })
     );

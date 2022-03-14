@@ -1,10 +1,9 @@
-import { Actors } from './actores.interface';
-
 export interface Peliculas {
     id: number;
     duration?: number;
-    actors: Actors[];
-    genre: string[];
+    actors?: number[];
+    namesActors?: string[];
+    genre?: string[];
     imdbRating?: number;
     poster?: string;
     title?: string;

@@ -1,1 +1,23 @@
-<p>list-companies works!</p>
+<ngx-spinner size="medium"></ngx-spinner>
+<!-- <div class="row card-group" *ngIf="companies?.length>0; else nodata"> -->
+<div class="row card-group" *ngIf="companies?.length>0">
+
+    <div class="col-4" *ngFor="let companie of companies; let i = index">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Nombre: {{companie.name}}</h5>
+                <h5 class="card-title">Fecha de creación: {{companie.createYear}}</h5>
+                <p class="card-text">Pais: {{companie.country}}</p>
+                <p class="card-text">Pais: {{companie.employees}}</p>
+                <p class="card-text">Puntuacion de la critica: {{companie.rating}}</p>
+                <ol>
+                    <li>
+                        Peliculas de la compañia : {{companie.movies}}
+                    </li>
+                </ol>
+                <a (click)="selectMovie(companie)" class="btn btn-primary">Ver detalle</a>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#fff" type="ball-circus" [fullScreen]="true"></ngx-spinner>

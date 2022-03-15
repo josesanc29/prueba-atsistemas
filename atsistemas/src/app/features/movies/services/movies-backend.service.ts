@@ -18,9 +18,9 @@ export class MoviesBackendService {
     public http: HttpClient,
   ) {}
 
-  getListMoviesData(): Observable<Peliculas | any> {
+  getListMoviesData(): Observable<any> {
     const url = `${this.apiBase}/movies`;
-    return this.http.get(url).pipe(map((response: Peliculas) => {
+    return this.http.get(url).pipe(map((response: any) => {
       return response;
     }),
     catchError((error: HttpErrorResponse) => {

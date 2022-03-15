@@ -8,6 +8,8 @@ import { LanguageService } from 'src/app/shared/services/language.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Actors } from '../../models/actores.interface';
 import { ActivatedRoute, Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-list-movies',
@@ -15,9 +17,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./list-movies.component.css']
 })
 export class ListMoviesComponent implements OnInit {
-  peliculas: Peliculas[] = [];
-  actors: Actors[] = [];
-  namesActors: string[] = [];
+  peliculas: any[] = [];
+  pelicula: any;
+  actorsList: Actors[] = [];
   companies: Companies[] = [];
   emptyImage = './../../../../../assets/images/alert7.png';
   loading = false;
@@ -35,29 +37,50 @@ export class ListMoviesComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.getActors();
-    this.getMovies();
+    this.getData();
   }
 
   // tslint:disable-next-line:typedef
-  getMovies(){
+  getData(){
     this.spinner.show();
+    this.movieService.getListActors().subscribe((actors) => {
+          this.actorsList = actors;
+    });
     this.movieService.getListMovies().subscribe((listMovies: Peliculas[]) => {
       this.spinner.hide();
-      this.peliculas = listMovies;
-    });
-  }
-
-  // tslint:disable-next-line:typedef
-  getActors(){
-    this.movieService.getListActors().subscribe((listActors) => {
-      this.actors = listActors;
+      listMovies.map((movie) => {
+        this.pelicula = {
+          id: movie.id,
+          duration: movie.duration,
+          actors: movie.actors,
+          namesActors: [],
+          genre: movie.genre,
+          imdbRating: movie.imdbRating,
+          poster: movie.poster,
+          title: movie.title,
+          year: movie.year,
+        };
+        this.pelicula.actors.forEach((ma) => {
+          if (this.pelicula.actors.length) {
+            this.actorsList.forEach((al) => {
+              if (ma === al.id) {
+                if (this.peliculas.length <= listMovies.length){
+                  this.pelicula.namesActors.push(`${al.first_name} ${al.last_name}`);
+                  this.peliculas.push(this.pelicula);
+                }
+              }
+            });
+          } else {
+            return;
+          }
+        });
+      });
     });
   }
 
   // tslint:disable-next-line:typedef
   selectMovie(pelicula: Peliculas){
-    console.log('pelicula selected ', pelicula);
+    this.router.navigate(['movie/', pelicula.id]);
   }
 
   // tslint:disable-next-line:typedef

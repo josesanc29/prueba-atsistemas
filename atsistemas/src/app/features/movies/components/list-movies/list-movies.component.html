@@ -1,13 +1,29 @@
 <div class="row card-group" *ngIf="peliculas?.length>0">
-    <div class="col-4" *ngFor="let pelicula of peliculas; let i = index">
+    <div class="col-sm-12 col-md-12 col-lg-12" *ngFor="let pelicula of peliculas; let i = index">
         <div class="card">
-            <img *ngIf="pelicula.poster !== null" [src]="pelicula.poster" class="card-img-top" alt="Poster de la pelicula">
-            <img *ngIf="pelicula.poster === null" [src]="emptyImage" class="card-img-top" alt="Poster de la pelicula">
+            <img *ngIf="pelicula.poster !== null" [src]="pelicula.poster" class="card-img-top imagen-tarjeta" alt="Poster de la pelicula">
+            <img *ngIf="pelicula.poster === null" [src]="emptyImage" class="card-img-top imagen-tarjeta" alt="Poster de la pelicula">
             <div class="card-body">
                 <h5 class="card-title">Titulo: {{pelicula.title}}</h5>
                 <h5 class="card-title">Fecha de estreno: {{pelicula.year}}</h5>
                 <p class="card-text">Duracion: {{pelicula.duration}}</p>
                 <p class="card-text">Puntuacion de la critica: {{pelicula.imdbRating}}</p>
+                <p class="card-text">Actores principales: </p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Protagonistas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let actor of pelicula.namesActors">
+                            <td>
+                                {{actor}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <table class="table">
                     <thead>
@@ -20,20 +36,6 @@
                             <td>
                                 {{genero}}
                             </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let actor of pelicula.actors">
-                            <td>{{actor.actors}}</td>
                         </tr>
                     </tbody>
                 </table>

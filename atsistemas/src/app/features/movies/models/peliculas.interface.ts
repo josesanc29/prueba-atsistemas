@@ -1,7 +1,7 @@
 export interface Peliculas {
     id: number;
     duration?: number;
-    actors?: number[];
+    actors?: any[];
     namesActors?: string[];
     genre?: string[];
     imdbRating?: number;

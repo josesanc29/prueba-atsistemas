@@ -1,9 +1,15 @@
+import { element } from 'protractor';
+import { Companies } from './../../models/companies.interface';
 import { Peliculas } from './../../models/peliculas.interface';
 import { MoviesService } from './../../services/movies.service';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Actors } from '../../models/actores.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-list-movies',
@@ -12,8 +18,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class ListMoviesComponent implements OnInit {
   peliculas: any[] = [];
-  actors: any[] = [];
-  companies: any[] = [];
+  pelicula: any;
+  actorsList: Actors[] = [];
+  companies: Companies[] = [];
+  emptyImage = './../../../../../assets/images/alert7.png';
   loading = false;
   typeSelected: string;
 
@@ -21,48 +29,63 @@ export class ListMoviesComponent implements OnInit {
   constructor(private language: LanguageService,
               private movieService: MoviesService,
               public translate: TranslateService,
-              private spinner: NgxSpinnerService
+              private spinner: NgxSpinnerService,
+              private router: Router,
+              private route: ActivatedRoute,
               ) {
                 this.typeSelected = 'ball-fussion';
               }
 
   ngOnInit(): void {
-    this.getPeliculas();
-    this.getActors();
-    this.getCompanies();
+    this.getData();
   }
 
   // tslint:disable-next-line:typedef
-  getPeliculas(){
+  getData(){
     this.spinner.show();
-    this.movieService.getListMovies().subscribe((listMovies) => {
+    this.movieService.getListActors().subscribe((actors) => {
+          this.actorsList = actors;
+    });
+    this.movieService.getListMovies().subscribe((listMovies: Peliculas[]) => {
       this.spinner.hide();
-      this.peliculas = listMovies;
-    });
-  }
-
-  // tslint:disable-next-line:typedef
-  getActors(){
-    this.movieService.getListActors().subscribe((listActors) => {
-      this.actors = listActors;
-    });
-  }
-
-  // tslint:disable-next-line:typedef
-  getCompanies(){
-    this.movieService.getListCompanies().subscribe((listCompanies) => {
-      this.actors = listCompanies;
+      listMovies.map((movie) => {
+        this.pelicula = {
+          id: movie.id,
+          duration: movie.duration,
+          actors: movie.actors,
+          namesActors: [],
+          genre: movie.genre,
+          imdbRating: movie.imdbRating,
+          poster: movie.poster,
+          title: movie.title,
+          year: movie.year,
+        };
+        this.pelicula.actors.forEach((ma) => {
+          if (this.pelicula.actors.length) {
+            this.actorsList.forEach((al) => {
+              if (ma === al.id) {
+                if (this.peliculas.length <= listMovies.length){
+                  this.pelicula.namesActors.push(`${al.first_name} ${al.last_name}`);
+                  this.peliculas.push(this.pelicula);
+                }
+              }
+            });
+          } else {
+            return;
+          }
+        });
+      });
     });
   }
 
   // tslint:disable-next-line:typedef
   selectMovie(pelicula: Peliculas){
-    console.log('pelicula selected ', pelicula);
+    this.router.navigate(['movie/', pelicula.id]);
   }
 
   // tslint:disable-next-line:typedef
   addMovie(){
-    console.log('me has pulsado para añadir una nueva pelicula');
+    this.router.navigate(['movie']);
   }
 
 }

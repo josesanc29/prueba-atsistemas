@@ -40,7 +40,6 @@ export class ListActorsComponent implements OnInit {
   // tslint:disable-next-line:typedef
   getPeliculas(){
     this.movieService.getListMovies().subscribe((listMovies) => {
-      console.log('listado de peliculas ', listMovies);
       this.peliculas = listMovies;
     });
   }

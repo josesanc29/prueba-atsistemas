@@ -12,17 +12,17 @@ const routes: Routes = [
     data: { titulo: 'Tabla de peliculas' }
   },
   {
-    path: 'movies',
+    path: 'list-movies',
     component: ListMoviesComponent,
     data: { titulo: 'Tabla de peliculas' }
   },
   {
-    path: 'new-movie',
+    path: 'movie',
     component: DetailMoviesComponent,
     data: { titulo: 'Nueva pelicula' }
   },
   {
-    path: 'movies/:id',
+    path: 'movie/:id',
     component: DetailMoviesComponent,
     data: { titulo: 'Detalle de la pelicula' }
   },

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { FeaturesRoutingModule } from './features-routing.module';
 import { ListMoviesComponent } from './movies/components/list-movies/list-movies.component';
 import { DetailMoviesComponent } from './movies/components/detail-movies/detail-movies.component';
@@ -15,6 +14,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
+import { } from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 

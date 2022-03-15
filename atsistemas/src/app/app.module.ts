@@ -9,6 +9,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       useDefaultLang: true,
       isolate: true
     }),
+    NgxSpinnerModule,
   ],
   exports: [],
   providers: [{ provide: LOCALE_ID, useValue: 'es' }, ],

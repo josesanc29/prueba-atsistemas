@@ -119,4 +119,6 @@ export class DetailMoviesComponent implements OnInit {
     });
   }
 
+  submit(): void {}
+
 }

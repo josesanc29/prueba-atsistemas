@@ -1,1 +1,46 @@
-<p>detail-movies works!</p>
+<div class="container">
+    <form novalidate (ngSubmit)="submit()" #form="ngForm" [formGroup]="formulario">
+        <h3>{{titulo}}</h3>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Poster</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+            <div class="form-group col-md-6">
+                <label>title</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Titulo">
+            </div>
+            <div class="form-group col-md-6">
+                <label>duration</label>
+                <input type="number" class="form-control" placeholder="Duracion">
+            </div>
+            <div class="form-group col-md-6">
+                <label>year</label>
+                <input type="number" class="form-control" placeholder="Año">
+            </div>
+            <div class="form-group col-md-6">
+                <label>imdbRating</label>
+                <input type="number" class="form-control" placeholder="imdbRating">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Actores</label>
+                <select class="form-control">
+                <option selected>Choose...</option>
+                <option>...</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label>Genero</label>
+                <select class="form-control">
+                <option selected>Choose...</option>
+                <option>...</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Añadir pelicula</button>
+    </form>
+</div>

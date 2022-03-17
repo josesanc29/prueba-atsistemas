@@ -52,7 +52,39 @@ export class MoviesBackendService {
   }
 
   get(id: number): Observable<any> {
-    return;
+    const url = `${this.apiBase}/movies/`;
+    return this.http.get(`${url}/${id}`).pipe(
+      map((response: any) => {
+        return response;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return of({
+          ok: false,
+          message: this.translate.instant('errores.noencontradodoc'),
+          error: error.error
+        });
+      })
+    );
+  }
+
+  create(data: any): Observable<any> {
+    const url = `${this.apiBase}/movies`;
+    return this.http.post(url, data).pipe(
+      map((response: any) => {
+        return {
+          ok: response.estado === 0,
+          message: response,
+          data: response
+        };
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return of({
+          ok: false,
+          message: this.translate.instant('errores.nocreadodoc'),
+          data: error.error.datos
+        });
+      })
+    );
   }
 
 }

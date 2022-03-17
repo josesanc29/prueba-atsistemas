@@ -66,6 +66,7 @@ export class ListMoviesComponent implements OnInit {
               if (ma === al.id) {
                 if (this.peliculas.length <= listMovies.length){
                   this.pelicula.namesActors.push(`${al.first_name} ${al.last_name}`);
+                  this.movieService.filter = this.pelicula;
                   this.peliculas.push(this.pelicula);
                 }
               }
@@ -87,5 +88,4 @@ export class ListMoviesComponent implements OnInit {
   addMovie(){
     this.router.navigate(['movie']);
   }
-
 }

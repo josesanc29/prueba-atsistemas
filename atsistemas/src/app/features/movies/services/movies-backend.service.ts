@@ -53,10 +53,8 @@ export class MoviesBackendService {
 
   get(id: number): Observable<any> {
     const url = `${this.apiBase}/movies/`;
-    console.log('URL GETID', this.apiBase);
     return this.http.get(`${url}/${id}`).pipe(
       map((response: any) => {
-        console.log('GETID ', response);
         return response;
       }),
       catchError((error: HttpErrorResponse) => {
@@ -73,7 +71,6 @@ export class MoviesBackendService {
     const url = `${this.apiBase}/movies`;
     return this.http.post(url, data).pipe(
       map((response: any) => {
-        console.log('create response ', response);
         return {
           ok: response.estado === 0,
           message: response,

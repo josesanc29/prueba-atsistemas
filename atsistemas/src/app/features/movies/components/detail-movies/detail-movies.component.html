@@ -2,9 +2,14 @@
     <form novalidate (ngSubmit)="submit()" #form="ngForm" [formGroup]="formulario">
         <h3>{{titulo}}</h3>
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" *ngIf="!editMode">
                 <label>Poster: </label>
                 <input type="file" class="form-control-file" formControlName="poster" id="exampleFormControlFile1">
+            </div>
+            <div class="form-group col-md-6" *ngIf="editMode ">
+                <label>Poster: </label>
+                <img *ngIf="filtroService.poster !== null" [src]="filtroService.poster" class="card-img-top imagen-tarjeta" alt="Poster de la pelicula">
+                <img *ngIf="filtroService.poster === null" [src]="emptyImage" class="card-img-top imagen-tarjeta" alt="Poster de la pelicula">
             </div>
             <div class="form-group col-md-6">
                 <label>Titulo pelicula: </label>
@@ -25,13 +30,13 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" *ngIf="!editMode">
                 <label>Actores</label>
                 <select formControlName="actors" class="form-control">
-                <option *ngFor="let actor of actors" [value]="actor">...</option>
+                <option *ngFor="let actor of actorsArray; let index=index" [value]="actor.id">{{actor.name}}</option>
                 </select>
             </div>
-            <div class="form-group col-md-6" *ngIf="actoresSelected.length > 0">
+            <div class="form-group col-md-6" *ngIf="actoresSelected.length > 0 && editMode">
                 <table class="table">
                     <thead>
                         <tr>
@@ -47,13 +52,13 @@
                     </tbody>
                 </table>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" *ngIf="!editMode">
                 <label>Genero</label>
                 <select formControlName="genre" class="form-control">
-                <option>...</option>
+                <option *ngFor="let genre of genreArray; let index=index" [value]="genre.id">{{genre.name}}</option>
                 </select>
             </div>
-            <div class="form-group col-md-6" *ngIf="generosSelected.length > 0">
+            <div class="form-group col-md-6" *ngIf="generosSelected.length > 0 && editMode">
                 <table class="table">
                     <thead>
                         <tr>
@@ -70,6 +75,10 @@
                 </table>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Añadir pelicula</button>
     </form>
+    <div class="form-group">
+        <div class="col-md-6" *ngIf="!editMode">
+            <button type="submit" class="btn btn-primary">Añadir pelicula</button>
+        </div>
+    </div>
 </div>

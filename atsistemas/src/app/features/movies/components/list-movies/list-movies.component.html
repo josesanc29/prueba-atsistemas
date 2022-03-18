@@ -3,8 +3,9 @@
         <button class="btn btn-primary" type="button" (click)="addMovie()">Nueva pelicula</button>
     </div>
 </div>
+<br>
 <div class="row card-group" *ngIf="peliculas?.length>0">
-    <div class="col-sm-12 col-md-12 col-lg-12" *ngFor="let pelicula of peliculas; let i = index">
+    <div class="col-sm-12 col-md-12 col-lg-4" *ngFor="let pelicula of peliculas; let i = index">
         <div class="card">
             <img *ngIf="pelicula.poster !== null" [src]="pelicula.poster" class="card-img-top imagen-tarjeta" alt="Poster de la pelicula">
             <img *ngIf="pelicula.poster === null" [src]="emptyImage" class="card-img-top imagen-tarjeta" alt="Poster de la pelicula">
